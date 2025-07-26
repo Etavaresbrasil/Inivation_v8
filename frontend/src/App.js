@@ -432,6 +432,54 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            <Route 
+              path="/admin" 
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <Admin />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/desafios" 
+              element={
+                <ProtectedRoute allowedRoles={['empresa']}>
+                  <MeusDesafios />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/avaliacoes" 
+              element={
+                <ProtectedRoute allowedRoles={['empresa']}>
+                  <Avaliacoes />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/desafios-disponiveis" 
+              element={
+                <ProtectedRoute allowedRoles={['formando']}>
+                  <DesafiosDisponiveis />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/minhas-respostas" 
+              element={
+                <ProtectedRoute allowedRoles={['formando']}>
+                  <MinhasRespostas />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/matches" 
+              element={
+                <ProtectedRoute>
+                  <Matches />
+                </ProtectedRoute>
+              } 
+            />
             <Route path="*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </BrowserRouter>
