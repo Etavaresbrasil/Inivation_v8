@@ -174,8 +174,15 @@ async def register(user_data: UsuarioCreate):
     user_dict["senha_hash"] = get_password_hash(user_data.senha)
     del user_dict["senha"]
     
-    user = Usuario(**user_dict)
-    await db.usuarios.insert_one(user.dict())
+    # Create user object without senha_hash for response
+    user_dict_clean = user_dict.copy()
+    del user_dict_clean["senha_hash"]
+    user = Usuario(**user_dict_clean)
+    
+    # Save to database with senha_hash
+    user_to_save = user.dict()
+    user_to_save["senha_hash"] = user_dict["senha_hash"]
+    await db.usuarios.insert_one(user_to_save)
     
     # Create access token
     access_token = create_access_token(data={"sub": user.id})
