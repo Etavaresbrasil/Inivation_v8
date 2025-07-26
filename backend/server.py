@@ -154,6 +154,10 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     return Usuario(**user)
 
 # Authentication Routes
+@api_router.get("/")
+async def root():
+    return {"message": "TCC Inovation API - Conectando formandos e empresas!", "version": "1.0", "status": "active"}
+
 @api_router.post("/register", response_model=Token)
 async def register(user_data: UsuarioCreate):
     # Check if user exists
